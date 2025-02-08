@@ -1,0 +1,36 @@
+FROM php:8.3-fpm
+
+RUN apt-get update && apt-get install -y \
+    libpng-dev \
+    libjpeg62-turbo-dev \
+    libfreetype6-dev \
+    zip \
+    unzip \
+    git \
+    curl \
+    nano \
+    libzip-dev \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install gd zip pdo pdo_mysql
+
+RUN pecl install redis \
+    && docker-php-ext-enable redis
+
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+COPY ./www.conf /etc/php/8.3/fpm/pool.d/www.conf
+
+WORKDIR /var/www
+
+COPY . .
+
+RUN composer install --no-interaction --prefer-dist --optimize-autoloader
+
+RUN chmod -R 777 storage bootstrap/cache
+
+EXPOSE 9000
+
+COPY start-app.sh /start-app.sh
+RUN chmod +x /start-app.sh
+
+CMD ["/start-app.sh"]
