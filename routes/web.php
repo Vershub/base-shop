@@ -3,9 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Shop\Home\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Shop\Product\ProductController as ShopProductController;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [ShopProductController::class, 'index'])->name('products.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

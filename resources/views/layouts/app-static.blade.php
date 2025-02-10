@@ -22,8 +22,8 @@
             <div class="text-2xl font-bold text-gray-800">ShopName</div>
             <nav class="hidden md:block">
                 <ul class="flex space-x-6">
-                    <li><a href="#" class="text-gray-600 hover:text-gray-800">Home</a></li>
-                    <li><a href="#" class="text-gray-600 hover:text-gray-800">Products</a></li>
+                    <li><a href="{{ route('home') }}" class="text-gray-600 hover:text-gray-800">Home</a></li>
+                    <li><a href="{{ route('products.index') }}" class="text-gray-600 hover:text-gray-800">Products</a></li>
                     <li><a href="#" class="text-gray-600 hover:text-gray-800">About</a></li>
                     <li><a href="#" class="text-gray-600 hover:text-gray-800">Contact</a></li>
                 </ul>
