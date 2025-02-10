@@ -15,38 +15,9 @@
     @vite(['resources/js/app.js', "resources/js/Pages/{$page['component']}.vue"])
     @inertiaHead
 </head>
-<body class="min-h-screen flex flex-col">
-<!-- Header -->
-<header class="bg-white shadow-md">
-    <div class="container mx-auto px-4 py-6 flex items-center justify-between">
-        <div class="text-2xl font-bold text-gray-800">ShopName</div>
-        <nav class="hidden md:block">
-            <ul class="flex space-x-6">
-                <li><a href="#" class="text-gray-600 hover:text-gray-800">Home</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-gray-800">Products</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-gray-800">About</a></li>
-                <li><a href="#" class="text-gray-600 hover:text-gray-800">Contact</a></li>
-            </ul>
-        </nav>
-        <div class="flex items-center space-x-4">
-            <a href="#" class="text-gray-600 hover:text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-            </a>
-            <a href="#" class="text-gray-600 hover:text-gray-800">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-            </a>
-        </div>
-    </div>
-</header>
-
-<main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-    @inertia
-</main>
-
+<body class="bg-gray-100">
+<!-- Top Navigation Bar -->
+@inertia
 <!-- Footer -->
 <footer class="bg-gray-800 text-white mt-auto">
     <div class="container mx-auto px-4 py-8">
