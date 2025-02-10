@@ -9,17 +9,17 @@ import { Link } from '@inertiajs/vue3';
                 <div class="container mx-auto px-4">
                     <div class="flex items-center justify-between h-16">
                         <div class="flex items-center">
-                            <a href="#" class="text-2xl font-bold">ShopName</a>
+                            <a :href="route('home')" class="text-2xl font-bold">ShopName</a>
                             <div class="ml-10 flex items-baseline space-x-4">
-                                <a href="#" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Dashboard</a>
+                                <Link :href="route('dashboard')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Dashboard</Link>
                                 <a href="#" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Orders</a>
                                 <a href="#" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Wishlist</a>
-                                <a href="#" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Profile</a>
+                                <Link :href="route('profile.edit')" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Profile</Link>
                                 <a href="#" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-700 transition duration-200">Settings</a>
                             </div>
                         </div>
                         <div class="flex items-center">
-                            <span class="text-gray-300 mr-4">Welcome, John Doe</span>
+                            <span class="text-gray-300 mr-4">{{ $page.props.auth.user.name }}</span>
                             <Link
                                 :href="route('logout')"
                                 method="post"
