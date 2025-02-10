@@ -7,7 +7,7 @@ use App\Http\Controllers\Shop\Product\ProductController as ShopProductController
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/', [ShopProductController::class, 'index'])->name('products.index');
+Route::get('/products', [ShopProductController::class, 'index'])->name('products.index');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
