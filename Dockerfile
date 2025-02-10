@@ -2,6 +2,7 @@ FROM php:8.3-fpm
 
 RUN apt-get update && apt-get install -y \
     libpng-dev \
+    libzstd-dev \
     libjpeg62-turbo-dev \
     libfreetype6-dev \
     zip \
