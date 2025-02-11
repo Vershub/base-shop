@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('locale_code')->index();
             $table->string('name');
             $table->string('unit')->nullable(); // For features like weight, size, etc.
-            $table->unique(['feature_id', 'locale']);
+            $table->unique(['feature_id', 'locale_code']);
             $table->timestamps();
         });
     }
