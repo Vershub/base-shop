@@ -4,16 +4,18 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Shop\Home\HomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Shop\Product\ProductController as ShopProductController;
+use App\Http\Controllers\Admin\Category\CategoryController as AdminCategoryController;
 use Inertia\Inertia;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/products', [ShopProductController::class, 'index'])->name('products.index');
 
-
 Route::middleware('auth')->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->middleware(['role:admin|manager'])->name('admin.dashboard');
+    //ADMIN ROUTES
+    Route::middleware(['role:admin|manager'])->name('admin.')->prefix('admin')->group(function () {
+        Route::get('/dashboard', fn () => Inertia::render('Admin/Dashboard'))->name('dashboard');
+        Route::resource('categories', AdminCategoryController::class)->except('show');
+    });
 
 
     Route::get('/dashboard', function () {
