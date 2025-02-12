@@ -2,6 +2,12 @@
   <AdminLayout>
     <div class="mt-8">
       <h3 class="text-xl font-semibold text-gray-800 mb-4">Categories</h3>
+        <div class="mb-3 text-right">
+            <Link
+                :href="route('admin.categories.create')"
+                class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-colors duration-200"
+            >Create</Link>
+        </div>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
@@ -29,5 +35,6 @@
 </template>
 
 <script setup>
+import {Link} from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 </script>

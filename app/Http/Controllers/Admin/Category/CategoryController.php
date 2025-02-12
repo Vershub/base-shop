@@ -19,9 +19,11 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): void
+    public function create(): \Inertia\Response
     {
-        //
+        return Inertia::render('Admin/Category/Create', [
+            'languages' => config('laravellocalization.supportedLocales')
+        ]);
     }
 
     /**
