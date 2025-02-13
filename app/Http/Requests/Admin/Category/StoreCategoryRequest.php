@@ -25,23 +25,17 @@ class StoreCategoryRequest extends FormRequest
     public function rules(): array
     {
         $defaultLocale = $this->getDefaultLocaleFromLocalesArray($this->array('locales'));
-
         return [
             "locales.{$defaultLocale}" => ['required', 'array', 'min:1'],
             "locales.{$defaultLocale}.name" => ['required'],
             "locales.{$defaultLocale}.description" => ['required'],
 
-            'data.slug' => [
+            'slug' => [
                 'required',
                 'string',
                 'max:255',
                 'unique:categories,slug'
             ],
-
-            'data.description' => 'nullable|string|max:1000',
-            'data.active' => 'boolean',
-            'data.meta_title' => 'nullable|string|max:255',
-            'data.meta_description' => 'nullable|string|max:500',
         ];
     }
 
