@@ -1,7 +1,7 @@
 <template>
     <AdminLayout>
-
-        <Form :languages="languages" />
+        <h1 class="text-center mb-3 uppercase">Create Category</h1>
+        <Form :languages="languages" :errors="errors" />
     </AdminLayout>
 </template>
 
@@ -9,5 +9,8 @@
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import Form from "./Form.vue";
 
-defineProps(['languages']);
+defineProps({
+    languages: Object,
+    errors: Object
+});
 </script>

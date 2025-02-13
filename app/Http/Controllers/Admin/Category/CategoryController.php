@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -29,9 +30,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): void
+    public function store(StoreCategoryRequest $request): void
     {
-        //
+        dd($request->all());
     }
 
     /**
