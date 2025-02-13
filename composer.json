@@ -16,7 +16,8 @@
         "laravel/tinker": "^2.9",
         "mcamara/laravel-localization": "^2.2",
         "spatie/laravel-permission": "^6.13",
-        "tightenco/ziggy": "^2.0"
+        "tightenco/ziggy": "^2.0",
+        "vershub/laraveltranslations": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",

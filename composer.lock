@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a4dd3327aa5473f926316365fa02395",
+    "content-hash": "176c7a6370a0b33e81e8f0527ac42b9a",
     "packages": [
         {
             "name": "brick/math",
@@ -5950,6 +5950,54 @@
             "time": "2024-12-21T16:25:41+00:00"
         },
         {
+            "name": "vershub/laraveltranslations",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Vershub/laraveltranslations.git",
+                "reference": "6fc129270f324a6059c20b3841b763655c9d7102"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Vershub/laraveltranslations/zipball/6fc129270f324a6059c20b3841b763655c9d7102",
+                "reference": "6fc129270f324a6059c20b3841b763655c9d7102",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=8.2"
+            },
+            "default-branch": true,
+            "type": "library",
+            "extra": {
+                "readme": "README.md",
+                "laravel": {
+                    "providers": [
+                        "Vershub\\LaravelTranslations\\LaravelTranslationsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Vershub\\LaravelTranslations\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "vers"
+                }
+            ],
+            "description": "laravel package for translatable models",
+            "support": {
+                "issues": "https://github.com/Vershub/laraveltranslations/issues",
+                "source": "https://github.com/Vershub/laraveltranslations/tree/master"
+            },
+            "time": "2025-01-11T23:11:13+00:00"
+        },
+        {
             "name": "vlucas/phpdotenv",
             "version": "v5.6.1",
             "source": {
@@ -8896,7 +8944,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "vershub/laraveltranslations": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
