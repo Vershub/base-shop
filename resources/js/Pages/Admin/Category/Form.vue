@@ -112,16 +112,18 @@
 import { reactive, watch } from "vue";
 import { router } from '@inertiajs/vue3';
 import { ref } from "vue";
+import { useLocaleStore } from "@/stores/localeStore.js";
 
 defineProps({
     languages: Object,
     errors: Object
 });
 
-const activeLocale = ref('de');
+const activeLocale = ref(useLocaleStore().defaultLocale);
+
 const form = reactive({
     locales: {
-        de: {},
+      [activeLocale.value]: {},
     },
     data: {
         active: true,
@@ -129,15 +131,18 @@ const form = reactive({
     },
 });
 
-watch(activeLocale, (newLocale, oldValue) => {
-    if (!form.locales[newLocale]) {
-        form.locales[newLocale] = {};
-    }
-    if (Object.keys(form.locales[oldValue]).length === 0) {
-        console.log('test')
-        delete form.locales[oldValue];
-    }
-});
+const handleLocaleChange = (newLocale, previousLocale) => {
+  if (!form.locales[newLocale]) {
+    form.locales[newLocale] = {};
+  }
+
+  const isPreviousLocaleEmpty = Object.keys(form.locales[previousLocale]).length === 0;
+  if (isPreviousLocaleEmpty) {
+    delete form.locales[previousLocale];
+  }
+};
+
+watch(activeLocale, handleLocaleChange);
 
 function submit() {
     router.post(route('admin.categories.store'), form);
