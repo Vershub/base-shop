@@ -2,7 +2,6 @@
 
 namespace App\Models\Category;
 
-use Illuminate\Database\Eloquent\Model;
 use Vershub\LaravelTranslations\Model\TranslatableModel;
 
 class Category extends TranslatableModel

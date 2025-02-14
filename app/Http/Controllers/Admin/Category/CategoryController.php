@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Admin\Category;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
+use App\Models\Category\Category;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class CategoryController extends Controller
@@ -30,9 +33,27 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreCategoryRequest $request): void
+    public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        dd($request->all());
+        DB::transaction(function () use ($request) {
+            $category = Category::create([
+                'slug' => $request->string('slug'),
+                'active' => $request->boolean('active'),
+                'sort_order' => $request->integer('sort_order'),
+            ]);
+
+            foreach ($request->array('locales') as $localeCode => $locale) {
+                $category->translates()->create([
+                    'locale_code' => $localeCode,
+                    'name' => $locale['name'],
+                    'description' => $locale['description'],
+                    'meta_title' => $locale['meta_title'],
+                    'meta_description' => $locale['meta_description'],
+                ]);
+            }
+        });
+
+        return to_route('admin.categories.index');
     }
 
     /**
