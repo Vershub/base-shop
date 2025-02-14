@@ -62,19 +62,14 @@ class CategoryController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id): void
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): void
+    public function edit(int $id): \Inertia\Response
     {
-        //
+        return Inertia::render('Admin/Category/Edit', [
+            'category' => Category::with('translates')->find($id),
+            'languages' => config('laravellocalization.supportedLocales')
+        ]);
     }
 
     /**

@@ -3,10 +3,7 @@
     <div class="mt-8">
       <h3 class="text-xl font-semibold text-gray-800 mb-4">Categories</h3>
       <div class="mb-3 text-right">
-        <Link
-          :href="route('admin.categories.create')"
-          class="px-4 py-2 bg-blue-500 text-white rounded-lg shadow-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-colors duration-200"
-        >Create</Link>
+        <ButtonPrimaryLink title="Create" :link-route="route('admin.categories.create')"/>
       </div>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">
@@ -49,6 +46,7 @@ import AdminLayout from "@/Layouts/AdminLayout.vue";
 import ActiveBadge from "@/Components/Admin/ActiveBadge.vue";
 import DeleteLink from "@/Components/Admin/DeleteLink.vue";
 import EditLink from "@/Components/Admin/EditLink.vue";
+import ButtonPrimaryLink from "@/Components/Admin/ButtonPrimaryLink.vue";
 
 defineProps({
   categories: Array,
