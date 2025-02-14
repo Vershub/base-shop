@@ -17,7 +17,12 @@ class CategoryController extends Controller
      */
     public function index(): \Inertia\Response
     {
-        return Inertia::render('Admin/Category/Index');
+        return Inertia::render('Admin/Category/Index', [
+            'categories' => Category::query()
+                ->select(['id', 'slug', 'sort_order', 'active', 'created_at'])
+                ->withTranslation(':id,category_id,name,locale_code')
+                ->get()
+        ]);
     }
 
     /**
