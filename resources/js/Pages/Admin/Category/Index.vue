@@ -9,19 +9,19 @@
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
           <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category ID</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sort Order</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Create Date</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="category in categories" :key="category.id">
-            <td class="px-6 py-4 whitespace-nowrap">#{{ category.id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">{{ category.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap">{{ category?.translation.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{  category.sort_order }}</td>
+            <td class="px-6 py-4 whitespace-nowrap">#{{  category.sort_order }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <ActiveBadge :status="!!category.active" />
             </td>

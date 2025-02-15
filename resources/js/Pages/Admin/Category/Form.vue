@@ -119,19 +119,36 @@ import { ref } from "vue";
 import { useForm } from "@inertiajs/vue3";
 import { useLocaleStore } from "@/stores/localeStore.js";
 
-defineProps({
-  languages: Object,
+const props = defineProps({
+  category: {
+    type: Object,
+    required: false
+  },
+  languages: {
+    type: Object,
+    required: true
+  }
 });
 
 const activeLocale = ref(useLocaleStore().defaultLocale);
 
 const form = useForm({
-  locales: {
-    [activeLocale.value]: {},
-  },
-  active: true,
-  sort_order: 1,
-  slug: ''
+  locales: props.category
+    ? props.category.translates.reduce((acc, translate) => {
+      acc[translate.locale_code] = {
+        name: translate.name,
+        description: translate.description,
+        meta_title: translate.meta_title,
+        meta_description: translate.meta_description,
+      };
+      return acc;
+    }, {})
+    : {
+      [activeLocale.value]: {},
+    },
+  active: props.category?.active ?? true,
+  sort_order: props.category?.sort_order ?? 1,
+  slug: props.category?.slug ?? ''
 });
 
 const handleLocaleChange = (newLocale, previousLocale) => {
@@ -147,7 +164,11 @@ const handleLocaleChange = (newLocale, previousLocale) => {
 
 watch(activeLocale, handleLocaleChange);
 
-function submit() {
-  form.post(route('admin.categories.store'));
-}
+const submit = () => {
+  if (props.category) {
+    form.put(route('admin.categories.update', props.category.id));
+  } else {
+    form.post(route('admin.categories.store'));
+  }
+};
 </script>

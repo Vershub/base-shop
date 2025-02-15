@@ -67,7 +67,7 @@ class CategoryController extends Controller
     public function edit(int $id): \Inertia\Response
     {
         return Inertia::render('Admin/Category/Edit', [
-            'category' => Category::with('translates')->find($id),
+            'category' => Category::with('translates')->findOrFail($id),
             'languages' => config('laravellocalization.supportedLocales')
         ]);
     }
@@ -75,9 +75,31 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id): void
+    public function update(Request $request, int $id): RedirectResponse
     {
-        //
+        $category = Category::findOrFail($id);
+
+        $category->update([
+            'slug' => $request->string('slug'),
+            'active' => $request->boolean('active'),
+            'sort_order' => $request->integer('sort_order'),
+        ]);
+
+        foreach ($request->array('locales') as $localeCode => $locale) {
+            $category->translates()->updateOrCreate(
+                [
+                    'locale_code' => $localeCode,
+                ],
+                [
+                    'name' => $locale['name'],
+                    'description' => $locale['description'],
+                    'meta_title' => $locale['meta_title'],
+                    'meta_description' => $locale['meta_description'],
+                ]
+            );
+        }
+
+        return to_route('admin.categories.index');
     }
 
     /**
