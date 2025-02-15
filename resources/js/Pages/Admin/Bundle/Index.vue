@@ -1,16 +1,15 @@
 <template>
   <AdminLayout>
     <div class="mt-8">
-      <h3 class="text-center mb-3 uppercase tracking-widest">Categories</h3>
+      <h3 class="text-center mb-3 uppercase tracking-widest">Bundles</h3>
       <div class="mb-3 text-right">
-        <ButtonPrimaryLink title="Create" :link-route="route('admin.categories.create')" link-text="Create"/>
+        <ButtonPrimaryLink title="Create" :link-route="route('admin.bundles.create')" link-text="Create"/>
       </div>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Sort Order</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Create Date</th>
@@ -18,20 +17,12 @@
           </tr>
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
-          <tr v-for="category in categories" :key="category.id">
-            <td class="px-6 py-4 whitespace-nowrap">{{ category.id }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ category?.translation.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">#{{ category.sort_order }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <ActiveBadge :status="!!category.active" />
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ category.created_at }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
-              <div class="flex gap-2">
-                <EditLink :edit-route="route('admin.categories.edit', category.id)" />
-                <DeleteLink :delete-route="route('admin.categories.destroy', category.id)"/>
-              </div>
-            </td>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap">#12345</td>
+            <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+            <td class="px-6 py-4 whitespace-nowrap">2023-05-01</td>
+            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span></td>
+            <td class="px-6 py-4 whitespace-nowrap">$123.45</td>
           </tr>
           </tbody>
         </table>
@@ -48,7 +39,7 @@ import EditLink from "@/Components/Admin/EditLink.vue";
 import ButtonPrimaryLink from "@/Components/Admin/ButtonPrimaryLink.vue";
 
 defineProps({
-  categories: Array,
+  bundles: Array,
 });
 
 </script>

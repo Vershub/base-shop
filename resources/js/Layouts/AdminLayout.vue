@@ -38,7 +38,9 @@
             >Categories
             </Link>
           </li>
-          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Products</a></li>
+          <li>
+            <Link :href="route('admin.bundles.index')" class="block py-2 px-4 rounded hover:bg-gray-700">Bundles</Link>
+          </li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Orders</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Customers</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Analytics</a></li>
