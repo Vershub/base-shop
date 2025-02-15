@@ -3,11 +3,12 @@
 namespace App\Models\Category;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Vershub\LaravelTranslations\Model\TranslatableModel;
 
 /**
- * @method static \Illuminate\Database\Eloquent\Builder<static> withTranslation()
+ * @method static Builder<static> withTranslation()
  */
 class Category extends TranslatableModel
 {
@@ -18,7 +19,7 @@ class Category extends TranslatableModel
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<mixed, mixed>
+     * @return Attribute<mixed, mixed>
      */
     protected function createdAt(): Attribute
     {
@@ -28,7 +29,7 @@ class Category extends TranslatableModel
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<mixed, mixed>
+     * @return Attribute<mixed, mixed>
      */
     protected function active(): Attribute
     {
