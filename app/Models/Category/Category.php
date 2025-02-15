@@ -17,6 +17,9 @@ class Category extends TranslatableModel
         'sort_order'
     ];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<mixed, mixed>
+     */
     protected function createdAt(): Attribute
     {
         return new Attribute(
@@ -24,6 +27,9 @@ class Category extends TranslatableModel
         );
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Casts\Attribute<mixed, mixed>
+     */
     protected function active(): Attribute
     {
         return new Attribute(
