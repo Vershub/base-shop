@@ -38,15 +38,14 @@
             >Categories
             </Link>
           </li>
-          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Orders</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Products</a></li>
+          <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Orders</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Customers</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Analytics</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Settings</a></li>
         </ul>
       </nav>
     </aside>
-
     <!-- Content Area -->
     <main class="flex-1 p-8">
       <slot/>
