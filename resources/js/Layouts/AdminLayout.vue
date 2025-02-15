@@ -39,7 +39,40 @@
             </Link>
           </li>
           <li>
-            <Link :href="route('admin.bundles.index')" class="block py-2 px-4 rounded hover:bg-gray-700">Bundles</Link>
+            <button
+              @click="isOpen = !isOpen"
+              class="flex items-center justify-between w-full py-2 px-4 rounded hover:bg-gray-700"
+            >
+              <span>Products</span>
+              <svg
+                class="w-4 h-4 ml-2 transition-transform duration-200"
+                :class="{ 'rotate-180': isOpen }"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div
+              v-show="isOpen"
+              class="left-0 mt-1 w-100 py-2 bg-gray-500 rounded-md shadow-xl z-20"
+            >
+              <Link
+                :href="route('admin.products.index')"
+                class="block px-4 py-2 text-sm hover:bg-gray-700"
+                :class="{'bg-gray-600': route().current('admin.products.*')}"
+              >
+                Products
+              </Link>
+              <Link
+                :href="route('admin.bundles.index')"
+                class="block px-4 py-2 text-sm hover:bg-gray-700"
+                :class="{'bg-gray-600': route().current('admin.bundles.*')}"
+              >Bundles
+              </Link>
+            </div>
+
           </li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Orders</a></li>
           <li><a href="#" class="block py-2 px-4 rounded hover:bg-gray-700">Customers</a></li>
@@ -57,4 +90,8 @@
 
 <script setup>
 import {Link} from "@inertiajs/vue3";
+import { ref } from 'vue'
+
+const isOpen = ref(false)
+
 </script>

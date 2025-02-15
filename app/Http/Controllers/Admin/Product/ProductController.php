@@ -1,27 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\Admin\Bundle;
+namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class BundleController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(): \Inertia\Response
     {
-        return Inertia::render('Admin/Bundle/Index');
+        return Inertia::render('Admin/Product/Index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): void
+    public function create(): \Inertia\Response
     {
-        //
+        return Inertia::render('Admin/Product/Create',[
+            'languages' => config('laravellocalization.supportedLocales')
+        ]);
     }
 
     /**

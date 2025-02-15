@@ -22,14 +22,20 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'locales.*.name' => ['required', 'string'],
-            'locales.*.description' => ['required', 'string'],
+        $appLocale = config('app.locale', 'en');
+        assert(is_string($appLocale));
 
-            'slug' => [
+        return [
+            'locales.*.name' => ['string', 'max:191'],
+            'locales.*.description' => ['string'],
+
+            "locales.$appLocale.name" => ['required', 'string', 'max:191'],
+            "locales.$appLocale.description" => ['required', 'string'],
+
+            'static.slug' => [
                 'required',
                 'string',
-                'max:255',
+                'max:191',
                 Rule::unique('categories', 'slug')->ignore($this->route('category'))
             ],
         ];

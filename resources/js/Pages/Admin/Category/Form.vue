@@ -1,10 +1,9 @@
 <template>
-  <div class="bg-white p-8 rounded-lg shadow-md w-full max-w">
+  <div
+    class="bg-white p-8 rounded-lg shadow-md w-full max-w"
+    :class="{'border border-red-600': form.hasErrors}"
+  >
     <form @submit.prevent="submit">
-      <div v-if="form.errors[`locales.${activeLocale}`]" class="text-sm text-red-500 mt-1 mb-3">
-        {{ form.errors[`locales.${activeLocale}`] }}
-      </div>
-
       <div class="mb-3 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         <div class="flex border-b">
           <button v-for="(value, key) in languages"
@@ -21,8 +20,8 @@
           <div class="mb-4">
             <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name(*)</label>
             <input
-              @focus="form.clearErrors()"
               v-model="form.locales[activeLocale].name"
+              @focus="form.clearErrors(`locales.${activeLocale}.name`)"
               type="text"
               name="name"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -36,6 +35,7 @@
             <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description(*)</label>
             <textarea
               v-model="form.locales[activeLocale].description"
+              @focus="form.clearErrors(`locales.${activeLocale}.description`)"
               name="description"
               rows="3"
               class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -71,21 +71,22 @@
         <div class="w-[50%]">
           <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">Slug(*)</label>
           <input
-            v-model="form.slug"
+            v-model="form.static.slug"
+            @focus="form.clearErrors('static.slug')"
             type="text"
             id="slug"
             name="slug"
             class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <div v-if="form.errors.slug" class="text-sm text-red-500 mt-1">
-            {{ form.errors.slug }}
+          <div v-if="form.errors[`static.slug`]" class="text-sm text-red-500 mt-1 mb-3">
+            {{ form.errors[`static.slug`] }}
           </div>
         </div>
 
         <div class="w-[50%]">
           <label for="sort_order" class="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
           <input
-            v-model="form.sort_order"
+            v-model="form.static.sort_order"
             type="number"
             step="1"
             id="sort_order"
@@ -97,7 +98,7 @@
 
       <div class="mb-3 flex items-center">
         <input
-          v-model="form.active"
+          v-model="form.static.active"
           type="checkbox"
           id="active"
           name="active"
@@ -116,8 +117,9 @@
 <script setup>
 import { watch } from "vue";
 import { ref } from "vue";
-import { useForm } from "@inertiajs/vue3";
 import { useLocaleStore } from "@/stores/localeStore.js";
+import { useEntityForm } from "@/Composables/forms/useEntityForm.js";
+import { useChangeLocaleTab } from "@/Composables/forms/useChangeLocaleTab.js";
 
 const props = defineProps({
   category: {
@@ -131,38 +133,14 @@ const props = defineProps({
 });
 
 const activeLocale = ref(useLocaleStore().defaultLocale);
+const { form } = useEntityForm(activeLocale.value, props.category ?? {active: true, sort_order: 1})
+useChangeLocaleTab(form, activeLocale);
 
-const form = useForm({
-  locales: props.category
-    ? props.category.translates.reduce((acc, translate) => {
-      acc[translate.locale_code] = {
-        name: translate.name,
-        description: translate.description,
-        meta_title: translate.meta_title,
-        meta_description: translate.meta_description,
-      };
-      return acc;
-    }, {})
-    : {
-      [activeLocale.value]: {},
-    },
-  active: props.category?.active ?? true,
-  sort_order: props.category?.sort_order ?? 1,
-  slug: props.category?.slug ?? ''
-});
-
-const handleLocaleChange = (newLocale, previousLocale) => {
-  if (!form.locales[newLocale]) {
-    form.locales[newLocale] = {};
+watch(() => form.errors, (newErrors) => {
+  if (Object.keys(newErrors).length > 0) {
+    activeLocale.value = useLocaleStore().defaultLocale;
   }
-
-  const isPreviousLocaleEmpty = Object.keys(form.locales[previousLocale]).length === 0;
-  if (isPreviousLocaleEmpty) {
-    delete form.locales[previousLocale];
-  }
-};
-
-watch(activeLocale, handleLocaleChange);
+}, { deep: true });
 
 const submit = () => {
   if (props.category) {

@@ -41,14 +41,17 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        DB::transaction(function () use ($request) {
+        $categoryData = $request->array('static');
+        $categoryTranslations = $request->array('locales');
+
+        DB::transaction(function () use ($categoryData, $categoryTranslations) {
             $category = Category::create([
-                'slug' => $request->string('slug'),
-                'active' => $request->boolean('active'),
-                'sort_order' => $request->integer('sort_order'),
+                'slug' => $categoryData['slug'],
+                'active' => $categoryData['active'],
+                'sort_order' => $categoryData['sort_order'],
             ]);
 
-            foreach ($request->array('locales') as $localeCode => $locale) {
+            foreach ($categoryTranslations as $localeCode => $locale) {
                 $category->translates()->create([
                     'locale_code' => $localeCode,
                     'name' => $locale['name'],
@@ -79,11 +82,12 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
         $category = Category::findOrFail($id);
+        $categoryData = $request->array('static');
 
         $category->update([
-            'slug' => $request->string('slug'),
-            'active' => $request->boolean('active'),
-            'sort_order' => $request->integer('sort_order'),
+            'slug' => $categoryData['slug'],
+            'active' => $categoryData['active'],
+            'sort_order' => $categoryData['sort_order'],
         ]);
 
         foreach ($request->array('locales') as $localeCode => $locale) {
