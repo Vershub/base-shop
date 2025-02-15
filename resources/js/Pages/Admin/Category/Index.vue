@@ -1,9 +1,9 @@
 <template>
   <AdminLayout>
     <div class="mt-8">
-      <h3 class="text-xl font-semibold text-gray-800 mb-4">Categories</h3>
+      <h3 class="text-center mb-3 uppercase tracking-widest">Categories</h3>
       <div class="mb-3 text-right">
-        <ButtonPrimaryLink title="Create" :link-route="route('admin.categories.create')"/>
+        <ButtonPrimaryLink title="Create" :link-route="route('admin.categories.create')" link-text="Create"/>
       </div>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">
@@ -41,7 +41,6 @@
 </template>
 
 <script setup>
-import {Link} from "@inertiajs/vue3";
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import ActiveBadge from "@/Components/Admin/ActiveBadge.vue";
 import DeleteLink from "@/Components/Admin/DeleteLink.vue";
