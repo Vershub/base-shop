@@ -17,13 +17,17 @@ class Category extends TranslatableModel
         'sort_order'
     ];
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Casts\Attribute<mixed, mixed>
-     */
     protected function createdAt(): Attribute
     {
         return new Attribute(
             get: fn (string $value) => Carbon::parse($value)->format('M d, Y g:i A')
+        );
+    }
+
+    protected function active(): Attribute
+    {
+        return new Attribute(
+            get: fn (int $value) => (bool) $value
         );
     }
 
