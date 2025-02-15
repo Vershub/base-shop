@@ -1,5 +1,5 @@
 <template>
-  <Link @click.prevent="confirmDelete">
+  <button @click.prevent="confirmDelete">
     <svg
       viewBox="0 0 1024 1024"
       fill="#000000"
@@ -21,11 +21,11 @@
           fill=""></path>
       </g>
     </svg>
-  </Link>
+  </button>
 </template>
 
 <script setup>
-import { Link, router } from "@inertiajs/vue3";
+import { router } from "@inertiajs/vue3";
 
 const props = defineProps({
     deleteRoute: {
