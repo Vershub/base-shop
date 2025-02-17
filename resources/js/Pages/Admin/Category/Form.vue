@@ -4,7 +4,7 @@
     :class="{'border border-red-600': form.hasErrors}"
   >
     <form @submit.prevent="submit">
-      <div class="mb-3 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
+      <div class="mb-4 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         <div class="flex border-b">
           <button v-for="(value, key) in languages"
                   @click="activeLocale = key"
@@ -18,97 +18,71 @@
 
         <div class="p-6">
           <div class="mb-4">
-            <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Name(*)</label>
-            <input
+            <InputText
+              label="Name(*)"
               v-model="form.locales[activeLocale].name"
-              @focus="form.clearErrors(`locales.${activeLocale}.name`)"
-              type="text"
-              name="name"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              :error-message="form.errors[`locales.${activeLocale}.name`]"
+              @clearError="form.clearErrors(`locales.${activeLocale}.name`)"
             />
-            <div v-if="form.errors[`locales.${activeLocale}.name`]" class="text-sm text-red-500 mt-1 mb-3">
-              {{ form.errors[`locales.${activeLocale}.name`] }}
-            </div>
           </div>
 
           <div class="mb-4">
-            <label for="description" class="block text-sm font-medium text-gray-700 mb-1">Description(*)</label>
-            <textarea
+            <InputTextArea
+              label="Description(*)"
               v-model="form.locales[activeLocale].description"
-              @focus="form.clearErrors(`locales.${activeLocale}.description`)"
-              name="description"
-              rows="3"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
-            <div v-if="form.errors[`locales.${activeLocale}.description`]" class="text-sm text-red-500 mt-1 mb-3">
-              {{ form.errors[`locales.${activeLocale}.description`] }}
-            </div>
+              :error-message="form.errors[`locales.${activeLocale}.description`]"
+              @clearError="form.clearErrors(`locales.${activeLocale}.description`)"
+            />
           </div>
 
           <div class="mb-4">
-            <label for="meta_title" class="block text-sm font-medium text-gray-700 mb-1">Meta Title</label>
-            <input
+            <InputText
+              label="Meta Title"
               v-model="form.locales[activeLocale].meta_title"
-              type="text"
-              name="meta_title"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <div class="mb-6">
-            <label for="meta_description" class="block text-sm font-medium text-gray-700 mb-1">Meta Description</label>
-            <textarea
+            <InputTextArea
+              label="Meta Description"
               v-model="form.locales[activeLocale].meta_description"
-              name="meta_description"
-              rows="3"
-              class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-            ></textarea>
+            />
           </div>
         </div>
       </div>
 
-      <div class="flex gap-4 mb-3">
+      <div class="flex gap-4 mb-4">
         <div class="w-[50%]">
-          <label for="slug" class="block text-sm font-medium text-gray-700 mb-1">Slug(*)</label>
-          <input
+          <InputText
+            label="Slug(*)"
             v-model="form.static.slug"
-            @focus="form.clearErrors('static.slug')"
-            type="text"
-            id="slug"
-            name="slug"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            :error-message="form.errors[`static.slug`]"
+            @clearError="form.clearErrors('static.slug')"
           />
-          <div v-if="form.errors[`static.slug`]" class="text-sm text-red-500 mt-1 mb-3">
-            {{ form.errors[`static.slug`] }}
-          </div>
         </div>
 
         <div class="w-[50%]">
-          <label for="sort_order" class="block text-sm font-medium text-gray-700 mb-1">Sort Order</label>
-          <input
+          <InputNumber
+            label="Sort Order"
             v-model="form.static.sort_order"
-            type="number"
-            step="1"
-            id="sort_order"
-            name="sort_order"
-            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
 
-      <div class="mb-3 flex items-center">
-        <input
+      <div class="mb-4">
+        <InputCheckbox
           v-model="form.static.active"
-          type="checkbox"
-          id="active"
-          name="active"
-          class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+          key-for="active"
+          label="Active"
         />
-        <label for="active" class="ml-2 block text-sm text-gray-700">Active</label>
       </div>
 
-      <div class="mb-3">
-        <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-colors duration-300">Submit</button>
+
+      <div class="mb-4">
+        <ButtonPrimary
+          type="submit"
+          :disabled="form.processing"
+        />
       </div>
     </form>
   </div>
@@ -120,6 +94,11 @@ import { ref } from "vue";
 import { useLocaleStore } from "@/stores/localeStore.js";
 import { useEntityForm } from "@/Composables/forms/useEntityForm.js";
 import { useChangeLocaleTab } from "@/Composables/forms/useChangeLocaleTab.js";
+import InputText from "@/Components/Admin/InputText.vue";
+import InputTextArea from "@/Components/Admin/InputTextArea.vue";
+import InputNumber from "@/Components/Admin/InputNumber.vue";
+import InputCheckbox from "@/Components/Admin/InputCheckbox.vue";
+import ButtonPrimary from "@/Components/Admin/ButtonPrimary.vue";
 
 const props = defineProps({
   category: {

@@ -7,7 +7,6 @@ use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category\Category;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -56,8 +55,8 @@ class CategoryController extends Controller
                     'locale_code' => $localeCode,
                     'name' => $locale['name'],
                     'description' => $locale['description'],
-                    'meta_title' => $locale['meta_title'],
-                    'meta_description' => $locale['meta_description'],
+                    'meta_title' => $locale['meta_title'] ?? null,
+                    'meta_description' => $locale['meta_description'] ?? null,
                 ]);
             }
         });
@@ -98,8 +97,8 @@ class CategoryController extends Controller
                 [
                     'name' => $locale['name'],
                     'description' => $locale['description'],
-                    'meta_title' => $locale['meta_title'],
-                    'meta_description' => $locale['meta_description'],
+                    'meta_title' => $locale['meta_title'] ?? null,
+                    'meta_description' => $locale['meta_description'] ?? null,
                 ]
             );
         }
