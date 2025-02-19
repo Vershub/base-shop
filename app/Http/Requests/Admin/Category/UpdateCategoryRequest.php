@@ -2,11 +2,13 @@
 
 namespace App\Http\Requests\Admin\Category;
 
+use App\Traits\AppLocale;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpdateCategoryRequest extends FormRequest
 {
+    use AppLocale;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -22,8 +24,7 @@ class UpdateCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        $appLocale = config('app.locale', 'en');
-        assert(is_string($appLocale));
+        $appLocale = $this->getAppLocale();
 
         return [
             'locales.*.name' => ['string', 'max:191'],
