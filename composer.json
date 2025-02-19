@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.9",
         "mcamara/laravel-localization": "^2.2",
         "spatie/laravel-permission": "^6.13",
+        "spatie/simple-excel": "^3.7",
         "tightenco/ziggy": "^2.0",
         "vershub/laraveltranslations": "dev-master"
     },
