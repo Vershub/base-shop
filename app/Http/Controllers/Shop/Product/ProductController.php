@@ -10,6 +10,11 @@ class ProductController extends Controller
 {
     public function index(): View
     {
-        return view('shop.product.index');
+        /**
+         * @var view-string $viewName
+         */
+        $viewName = 'shop.product.index';
+
+        return view($viewName);
     }
 }

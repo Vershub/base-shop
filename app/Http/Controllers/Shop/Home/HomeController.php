@@ -10,6 +10,11 @@ class HomeController extends Controller
 {
     public function index(): View
     {
-        return view('shop.home.index');
+        /**
+         * @var view-string $viewName
+         */
+        $viewName = 'shop.home.index';
+
+        return view($viewName);
     }
 }
