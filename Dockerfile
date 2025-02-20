@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd zip pdo pdo_mysql
+    && docker-php-ext-install gd zip pdo pdo_mysql opcache
 
 RUN pecl install redis \
     && docker-php-ext-enable redis
@@ -20,6 +20,9 @@ RUN pecl install redis \
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
 
 COPY ./www.conf /etc/php/8.3/fpm/pool.d/www.conf
+
+COPY php.ini /usr/local/etc/php/conf.d/php.ini
+
 
 WORKDIR /var/www
 
