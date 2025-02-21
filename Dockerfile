@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     nano \
     libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install gd zip pdo pdo_mysql opcache
+    && docker-php-ext-install gd zip pdo pdo_mysql opcache pcntl
 
 RUN pecl install redis \
     && docker-php-ext-enable redis
