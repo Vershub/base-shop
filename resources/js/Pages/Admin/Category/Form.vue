@@ -52,7 +52,10 @@
       </div>
 
       <div class="flex gap-4 mb-4">
-        <div class="w-[50%]">
+        <div class="w-[33%]">
+          <InputFile label="Image" />
+        </div>
+        <div class="w-[33%]">
           <InputText
             label="Slug(*)"
             v-model="form.static.slug"
@@ -61,7 +64,7 @@
           />
         </div>
 
-        <div class="w-[50%]">
+        <div class="w-[33%]">
           <InputNumber
             label="Sort Order"
             v-model="form.static.sort_order"
@@ -99,6 +102,7 @@ import InputTextArea from "@/Components/Admin/InputTextArea.vue";
 import InputNumber from "@/Components/Admin/InputNumber.vue";
 import InputCheckbox from "@/Components/Admin/InputCheckbox.vue";
 import ButtonPrimary from "@/Components/Admin/ButtonPrimary.vue";
+import InputFile from "@/Components/Admin/InputFile.vue";
 
 const props = defineProps({
   category: {
@@ -120,6 +124,19 @@ watch(() => form.errors, (newErrors) => {
     activeLocale.value = useLocaleStore().defaultLocale;
   }
 }, { deep: true });
+
+const handleFile = async (file) => {
+  try {
+    form.static.image.value = file;
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+  } catch (error) {
+    console.error('File handling error:', error);
+  }
+};
+
 
 const submit = () => {
   if (props.category) {
