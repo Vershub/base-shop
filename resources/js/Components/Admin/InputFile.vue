@@ -26,11 +26,13 @@ const props = defineProps({
     required: true,
   },
   preview: {
-    type: String,
+    required: false,
   }
 });
 
 const preview = ref(props.preview ?? null);
+
+const emit = defineEmits(['clearError', 'fileSelected']);
 
 const handleFileChange = (event) => {
   const file = event.target.files[0];
@@ -41,9 +43,6 @@ const handleFileChange = (event) => {
     emit('fileSelected', file);
   }
 };
-
-
-const emit = defineEmits(['clearError', 'fileSelected']);
 
 const clearError = () => {
   if (props.errorMessage) {

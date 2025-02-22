@@ -11,7 +11,7 @@ export function useEntityForm(activeLocale, entity) {
                 [activeLocale]: {},
             },
         static: entity ? Object.fromEntries(
-            Object.entries(entity).filter(([key]) => !['id', 'translates', 'created_at', 'updated_at'].includes(key))
+            Object.entries(entity).filter(([key]) => !['id', 'translates', 'created_at', 'updated_at', 'media'].includes(key))
         ) : {}
     });
 

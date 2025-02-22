@@ -3,7 +3,7 @@
     class="bg-white p-8 rounded-lg shadow-md w-full max-w"
     :class="{'border border-red-600': form.hasErrors}"
   >
-    <form @submit.prevent="submit">
+    <form @submit.prevent="submit" enctype="multipart/form-data">
       <div class="mb-4 mx-auto bg-white rounded-xl shadow-md overflow-hidden">
         <div class="flex border-b">
           <button v-for="(value, key) in languages"
@@ -129,23 +129,21 @@ watch(() => form.errors, (newErrors) => {
   }
 }, { deep: true });
 
-const handleFile = async (file) => {
-  try {
-    form.static.image = file;
-
-    const formData = new FormData();
-    formData.append('file', file);
-
-  } catch (error) {
-    console.error('File handling error:', error);
-  }
+const handleFile = (file) => {
+  form.static.image = file;
 };
 
 
 const submit = () => {
   if (props.category) {
-    form.put(route('admin.categories.update', props.category.id));
+    console.log(form)
+    form._method = 'PUT';
+    form.transform((data) => {
+      data._method = 'PUT';
+      return data;
+    }).post(route('admin.categories.update', props.category.id));
   } else {
+    console.log('create')
     form.post(route('admin.categories.store'));
   }
 };

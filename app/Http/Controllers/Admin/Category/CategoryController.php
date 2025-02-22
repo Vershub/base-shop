@@ -14,7 +14,6 @@ use Throwable;
 
 class CategoryController extends Controller
 {
-
     public function __construct(readonly public CategoryService $categoryService)
     {}
 
