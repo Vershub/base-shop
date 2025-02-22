@@ -9,14 +9,13 @@
   <div v-if="errorMessage" class="text-sm text-red-500 mt-1 mb-3">
     {{ errorMessage }}
   </div>
-  <div v-if="previewUrl" class="mt-2">
-    <img :src="previewUrl" alt="">
+  <div v-if="preview" class="mt-2">
+    <img :src="preview" alt="">
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-const previewUrl = ref(null);
 
 const props = defineProps({
   errorMessage: {
@@ -25,14 +24,19 @@ const props = defineProps({
   label: {
     type: String,
     required: true,
+  },
+  preview: {
+    type: String,
   }
 });
+
+const preview = ref(props.preview ?? null);
 
 const handleFileChange = (event) => {
   const file = event.target.files[0];
   if (file) {
     if (file.type.startsWith('image/')) {
-      previewUrl.value = URL.createObjectURL(file);
+      preview.value = URL.createObjectURL(file);
     }
     emit('fileSelected', file);
   }

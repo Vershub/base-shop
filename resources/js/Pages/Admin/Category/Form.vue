@@ -53,7 +53,11 @@
 
       <div class="flex gap-4 mb-4">
         <div class="w-[33%]">
-          <InputFile label="Image" />
+          <InputFile
+            label="Image"
+            @fileSelected="handleFile"
+            :preview="form.static.image"
+          />
         </div>
         <div class="w-[33%]">
           <InputText
@@ -127,7 +131,7 @@ watch(() => form.errors, (newErrors) => {
 
 const handleFile = async (file) => {
   try {
-    form.static.image.value = file;
+    form.static.image = file;
 
     const formData = new FormData();
     formData.append('file', file);

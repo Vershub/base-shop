@@ -5,18 +5,31 @@ namespace App\Models\Category;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Vershub\LaravelTranslations\Model\TranslatableModel;
 
 /**
  * @method static Builder<static> withTranslation()
+ * @property string|null $image
  */
-class Category extends TranslatableModel
+class Category extends TranslatableModel implements HasMedia
 {
+    use InteractsWithMedia;
+
+    public const CATEGORY_IMAGE_COLLECTION = 'category_image';
+
     protected $fillable = [
         'slug',
         'active',
         'sort_order'
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection(self::CATEGORY_IMAGE_COLLECTION)
+            ->singleFile();
+    }
 
     /**
      * @return Attribute<mixed, mixed>

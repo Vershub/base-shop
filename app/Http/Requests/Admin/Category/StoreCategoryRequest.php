@@ -24,6 +24,8 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
+        //dd($this->all());
+
         $appLocale = $this->getAppLocale();
 
         return [

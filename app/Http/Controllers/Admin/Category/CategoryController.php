@@ -6,12 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Category\StoreCategoryRequest;
 use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category\Category;
+use App\Services\Admin\Category\CategoryService;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Inertia\Inertia;
+use Throwable;
 
 class CategoryController extends Controller
 {
+
+    public function __construct(readonly public CategoryService $categoryService)
+    {}
+
     /**
      * Display a listing of the resource.
      */
@@ -37,29 +43,21 @@ class CategoryController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @throws Throwable
      */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        $categoryData = $request->array('static');
-        $categoryTranslations = $request->array('locales');
+        $image = null;
+        if ($request->hasFile('static.image')) {
+            /** @var UploadedFile $image */
+            $image = $request->file('static.image');
+        }
 
-        DB::transaction(function () use ($categoryData, $categoryTranslations) {
-            $category = Category::create([
-                'slug' => $categoryData['slug'],
-                'active' => $categoryData['active'],
-                'sort_order' => $categoryData['sort_order'],
-            ]);
-
-            foreach ($categoryTranslations as $localeCode => $locale) {
-                $category->translates()->create([
-                    'locale_code' => $localeCode,
-                    'name' => $locale['name'],
-                    'description' => $locale['description'],
-                    'meta_title' => $locale['meta_title'] ?? null,
-                    'meta_description' => $locale['meta_description'] ?? null,
-                ]);
-            }
-        });
+        $this->categoryService->createCategory(
+            categoryData: $request->array('static'),
+            translations: $request->array('locales'),
+            image: $image
+        );
 
         return to_route('admin.categories.index');
     }
@@ -69,39 +67,35 @@ class CategoryController extends Controller
      */
     public function edit(int $id): \Inertia\Response
     {
+        $category = Category::with('translates')->findOrFail($id);
+        $category->image = $category->getFirstMediaUrl(Category::CATEGORY_IMAGE_COLLECTION);
+
         return Inertia::render('Admin/Category/Edit', [
-            'category' => Category::with('translates')->findOrFail($id),
+            'category' => $category,
             'languages' => config('laravellocalization.supportedLocales')
         ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * @throws Throwable
      */
     public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
-        $category = Category::findOrFail($id);
         $categoryData = $request->array('static');
 
-        $category->update([
-            'slug' => $categoryData['slug'],
-            'active' => $categoryData['active'],
-            'sort_order' => $categoryData['sort_order'],
-        ]);
-
-        foreach ($request->array('locales') as $localeCode => $locale) {
-            $category->translates()->updateOrCreate(
-                [
-                    'locale_code' => $localeCode,
-                ],
-                [
-                    'name' => $locale['name'],
-                    'description' => $locale['description'],
-                    'meta_title' => $locale['meta_title'] ?? null,
-                    'meta_description' => $locale['meta_description'] ?? null,
-                ]
-            );
+        $image = null;
+        if ($request->hasFile('static.image')) {
+            /** @var UploadedFile $image */
+            $image = $request->file('static.image');
         }
+
+        $this->categoryService->updateCategory(
+            id: $id,
+            categoryData: $categoryData,
+            translations: $request->array('locales'),
+            image: $image
+        );
 
         return to_route('admin.categories.index');
     }
