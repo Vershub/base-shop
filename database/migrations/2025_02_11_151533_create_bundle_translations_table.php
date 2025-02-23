@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_bundle_translations', function (Blueprint $table) {
+        Schema::create('bundle_translations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_bundle_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('bundle_id')->constrained()->cascadeOnDelete();
             $table->string('locale_code')->index();
             $table->string('name');
             $table->text('description')->nullable();
             $table->string('meta_title')->nullable();
             $table->string('meta_description')->nullable();
-            $table->unique(['product_bundle_id', 'locale_code']);
+            $table->unique(['bundle_id', 'locale_code']);
             $table->timestamps();
         });
     }

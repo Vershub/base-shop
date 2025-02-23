@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('product_bundles', function (Blueprint $table) {
+        Schema::create('bundles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
             $table->string('slug')->unique();
