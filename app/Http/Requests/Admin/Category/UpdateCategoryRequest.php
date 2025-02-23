@@ -39,6 +39,7 @@ class UpdateCategoryRequest extends FormRequest
                 'max:191',
                 Rule::unique('categories', 'slug')->ignore($this->route('category'))
             ],
+            'static.image' => ['image']
         ];
     }
 }

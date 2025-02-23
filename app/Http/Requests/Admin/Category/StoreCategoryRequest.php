@@ -24,8 +24,6 @@ class StoreCategoryRequest extends FormRequest
      */
     public function rules(): array
     {
-        //dd($this->all());
-
         $appLocale = $this->getAppLocale();
 
         return [
@@ -41,6 +39,7 @@ class StoreCategoryRequest extends FormRequest
                 'max:191',
                 Rule::unique('categories', 'slug')->ignore($this->route('category'))
             ],
+            'static.image' => ['image']
         ];
     }
 }
