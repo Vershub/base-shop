@@ -102,8 +102,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id): void
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        Category::findOrFail($id)->delete();
+
+        return to_route('admin.categories.index');
     }
 }
