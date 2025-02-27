@@ -3,7 +3,7 @@
     <div class="mt-8">
       <h3 class="text-center mb-3 uppercase tracking-widest">Categories</h3>
       <div class="mb-3 text-right">
-        <ButtonPrimaryLink title="Create" :link-route="route('admin.categories.create')" link-text="Create"/>
+        <ButtonPrimaryLink v-if="$can('create_categories')" title="Create" :link-route="route('admin.categories.create')" link-text="Create"/>
       </div>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
         <table class="min-w-full divide-y divide-gray-200">

@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Enums\RolePermission;
 use App\Enums\UserRole;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
 
@@ -14,7 +14,9 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        collect(UserRole::values())->each(fn (string $role) => Role::create(['name' => $role]));
+        foreach (UserRole::cases() as $role) {
+            Role::create(['name' => $role->value])
+                ->givePermissionTo(RolePermission::forRole($role));
+        }
     }
-
 }

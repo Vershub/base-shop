@@ -1,6 +1,7 @@
 import '../css/app.css';
 import './bootstrap';
 import { createPinia } from "pinia";
+import { permissions } from './Plugins/permissions';
 
 import { createInertiaApp } from '@inertiajs/vue3';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
@@ -19,6 +20,7 @@ createInertiaApp({
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(plugin)
+            .use(permissions)
             .use(ZiggyVue)
             .use(createPinia())
             .mount(el);
