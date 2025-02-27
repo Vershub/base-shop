@@ -1,9 +1,16 @@
 import { useForm } from '@inertiajs/vue3'
 
-export function useEntityForm(activeLocale, entity) {
+interface Entity {
+    translates?: Array<{
+        locale_code: string;
+    }>;
+}
+
+export function useEntityForm(activeLocale: string, entity: Entity) {
     const form = useForm({
         locales: entity.translates
-            ? entity.translates.reduce((acc, translate) => {
+            ? entity.translates.reduce<Record<string, typeof entity.translates[number]>>
+            ((acc, translate) => {
                 acc[translate.locale_code] = translate;
                 return acc;
             }, {})

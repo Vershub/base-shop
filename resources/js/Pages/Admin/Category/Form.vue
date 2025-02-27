@@ -98,9 +98,9 @@
 <script setup>
 import { watch } from "vue";
 import { ref } from "vue";
-import { useLocaleStore } from "@/stores/localeStore.js";
-import { useEntityForm } from "@/Composables/forms/useEntityForm.js";
-import { useChangeLocaleTab } from "@/Composables/forms/useChangeLocaleTab.js";
+import { useLocaleStore } from "@/stores/localeStore.ts";
+import { useEntityForm } from "@/Composables/forms/useEntityForm.ts";
+import { useChangeLocaleTab } from "@/Composables/forms/useChangeLocaleTab.ts";
 import InputText from "@/Components/Admin/InputText.vue";
 import InputTextArea from "@/Components/Admin/InputTextArea.vue";
 import InputNumber from "@/Components/Admin/InputNumber.vue";
