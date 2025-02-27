@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Category\UpdateCategoryRequest;
 use App\Models\Category\Category;
 use App\Services\Admin\Category\CategoryService;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Inertia\Inertia;
 use Throwable;
@@ -46,16 +47,10 @@ class CategoryController extends Controller
      */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
-        $image = null;
-        if ($request->hasFile('static.image')) {
-            /** @var UploadedFile $image */
-            $image = $request->file('static.image');
-        }
-
         $this->categoryService->createCategory(
             categoryData: $request->array('static'),
             translations: $request->array('locales'),
-            image: $image
+            image: $this->extractImageFromRequest($request)
         );
 
         return to_route('admin.categories.index');
@@ -104,7 +99,7 @@ class CategoryController extends Controller
         return to_route('admin.categories.index');
     }
 
-    private function extractImageFromRequest(UpdateCategoryRequest $request): ?UploadedFile
+    private function extractImageFromRequest(Request $request): ?UploadedFile
     {
         if (!$request->hasFile('static.image')) {
             return null;
