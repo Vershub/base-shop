@@ -23,6 +23,6 @@ class Product extends TranslatableModel implements HasMedia
 
     protected function getForeignKeyForTranslation(): string
     {
-        // TODO: Implement getForeignKeyForTranslation() method.
+        return 'product_id';
     }
 }

@@ -83,17 +83,12 @@ class CategoryController extends Controller
     {
         $categoryData = $request->array('static');
 
-        $image = null;
-        if ($request->hasFile('static.image')) {
-            /** @var UploadedFile $image */
-            $image = $request->file('static.image');
-        }
-
         $this->categoryService->updateCategory(
             id: $id,
             categoryData: $categoryData,
             translations: $request->array('locales'),
-            image: $image
+            image: $this->extractImageFromRequest($request)
+
         );
 
         return to_route('admin.categories.index');
@@ -108,4 +103,17 @@ class CategoryController extends Controller
 
         return to_route('admin.categories.index');
     }
+
+    private function extractImageFromRequest(UpdateCategoryRequest $request): ?UploadedFile
+    {
+        if (!$request->hasFile('static.image')) {
+            return null;
+        }
+        /** @var UploadedFile $image */
+        $image = $request->file('static.image');
+
+        return $image;
+    }
+
+
 }
