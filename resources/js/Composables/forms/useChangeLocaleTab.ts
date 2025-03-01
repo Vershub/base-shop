@@ -4,8 +4,6 @@ interface useForm {
     locales: {
         [key: string]: {
             name?: string;
-            // Adding a default value for `name` in case it's undefined
-            name: string;
             description?: string;
             meta_title?: string;
             meta_description?: string;
