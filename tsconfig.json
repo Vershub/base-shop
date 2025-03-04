@@ -4,23 +4,31 @@
         "module": "ESNext",
         "moduleResolution": "bundler",
         "strict": true,
+        "noUnusedParameters": true,
         "jsx": "preserve",
         "importHelpers": true,
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "sourceMap": true,
         "baseUrl": ".",
-        "types": ["vite/client"],
+        "types": [
+            "vite/client",
+            "node"
+        ],
         "paths": {
             "@/*": ["resources/js/*"]
         },
-        "lib": ["ESNext", "DOM", "DOM.Iterable"]
+        "lib": ["ESNext", "DOM", "DOM.Iterable"],
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true
     },
     "include": [
         "resources/js/**/*.ts",
         "resources/js/**/*.d.ts",
         "resources/js/**/*.tsx",
-        "resources/js/**/*.vue"
+        "resources/js/**/*.vue",
+        "resources/js/shims-vue.d.ts"
     ],
     "exclude": ["node_modules"]
 }

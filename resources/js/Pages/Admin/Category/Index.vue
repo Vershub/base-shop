@@ -40,7 +40,7 @@
   </AdminLayout>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import AdminLayout from "@/Layouts/AdminLayout.vue";
 import ActiveBadge from "@/Components/Admin/ActiveBadge.vue";
 import DeleteLink from "@/Components/Admin/DeleteLink.vue";
