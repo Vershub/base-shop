@@ -10,14 +10,14 @@ import { ZiggyVue } from '../../vendor/tightenco/ziggy';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
 
-void createInertiaApp({
+createInertiaApp({
     title: (title) => `${title} - ${appName}`,
     resolve: (name) =>
         resolvePageComponent(
             `./Pages/${name}.vue`,
             import.meta.glob('./Pages/**/*.vue')
         ),
-    setup({ el, App, props, plugin }): VueApp {
+    setup({ el, App, props, plugin }) {
         const app = createApp({ render: () => h(App, props) });
 
         app.use(plugin)
@@ -31,4 +31,4 @@ void createInertiaApp({
     progress: {
         color: '#4B5563',
     },
-});
+}).catch(error => console.error('Inertia setup failed:', error));

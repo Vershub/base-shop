@@ -2,21 +2,19 @@
     "compilerOptions": {
         "target": "ESNext",
         "module": "ESNext",
-        "moduleResolution": "bundler",
         "strict": true,
         "noUnusedParameters": true,
         "jsx": "preserve",
         "importHelpers": true,
         "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true,
         "sourceMap": true,
+        "allowSyntheticDefaultImports": true,
+        "moduleResolution": "bundler",
         "baseUrl": ".",
-        "types": [
-            "vite/client",
-            "node"
-        ],
+        "types": ["vite/client", "node", "@vue/runtime-core", "vue"],
         "paths": {
-            "@/*": ["resources/js/*"]
+            "@/*": ["resources/js/*"],
+            "vue": ["./node_modules/vue"]
         },
         "lib": ["ESNext", "DOM", "DOM.Iterable"],
         "skipLibCheck": true,

@@ -27,19 +27,19 @@ class UpdateCategoryRequest extends FormRequest
         $appLocale = $this->getAppLocale();
 
         return [
-            'locales.*.name' => ['string', 'max:191'],
-            'locales.*.description' => ['string'],
+            'locales.*.name' => ['string', 'max:255'],
+            'locales.*.description' => ['string', 'max:1000'],
 
-            "locales.$appLocale.name" => ['required', 'string', 'max:191'],
-            "locales.$appLocale.description" => ['required', 'string'],
+            "locales.$appLocale.name" => ['required', 'string', 'max:255'],
+            "locales.$appLocale.description" => ['required', 'string', 'max:255'],
 
             'static.slug' => [
                 'required',
                 'string',
-                'max:191',
+                'max:255',
                 Rule::unique('categories', 'slug')->ignore($this->route('category'))
             ],
-            'static.image' => ['image']
+            'static.image' => $this->hasFile('static.image') ? ['mimes:jpeg,jpg,png,webp'] : ['string', 'max:255']
         ];
     }
 }

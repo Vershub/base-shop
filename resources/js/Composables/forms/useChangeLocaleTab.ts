@@ -1,4 +1,4 @@
-import { watch } from 'vue'
+import { watch, Ref } from 'vue';
 
 interface useForm {
     locales: {
@@ -16,7 +16,7 @@ interface useForm {
     }
 }
 
-export function useChangeLocaleTab(form: useForm, activeLocale: string) {
+export function useChangeLocaleTab(form: useForm, activeLocale: Ref<string>) {
     const handleLocaleChange = (newLocale: string, oldLocale: string) => {
         const ensureLocaleExists = (locale: string) => {
             if (!form.locales[locale]) {
@@ -33,10 +33,10 @@ export function useChangeLocaleTab(form: useForm, activeLocale: string) {
 
         ensureLocaleExists(newLocale);
         removeEmptyLocale(oldLocale);
-
     };
 
-    watch(() => activeLocale, handleLocaleChange);
+    // Watch the .value of the ref
+    watch(activeLocale, handleLocaleChange);
 
     return {
         handleLocaleChange
