@@ -136,14 +136,12 @@ const handleFile = (file) => {
 
 const submit = () => {
   if (props.category) {
-    console.log(form)
     form._method = 'PUT';
     form.transform((data) => {
       data._method = 'PUT';
       return data;
     }).post(route('admin.categories.update', props.category.id));
   } else {
-    console.log('create')
     form.post(route('admin.categories.store'));
   }
 };
