@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { watch } from "vue";
 import { ref } from "vue";
 import { useLocaleStore } from "@/stores/localeStore.ts";
