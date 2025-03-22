@@ -11,9 +11,8 @@ class Product extends TranslatableModel implements HasMedia
     use InteractsWithMedia;
 
     protected $fillable = [
-        ''
+        '',
     ];
-
 
     protected function getTranslationModel(): string
     {

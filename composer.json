@@ -64,7 +64,9 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
         ],
-        "phpstan": "vendor/bin/phpstan analyse --memory-limit=256M"
+        "check": "vendor/bin/phpstan analyse --memory-limit=256M && @php vendor/bin/pint --test",
+        "pint:check": "./vendor/bin/pint --test",
+        "pint:fix": "./vendor/bin/pint"
     },
     "extra": {
         "laravel": {

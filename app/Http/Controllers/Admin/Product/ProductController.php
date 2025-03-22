@@ -21,8 +21,8 @@ class ProductController extends Controller
      */
     public function create(): \Inertia\Response
     {
-        return Inertia::render('Admin/Product/Create',[
-            'languages' => config('laravellocalization.supportedLocales')
+        return Inertia::render('Admin/Product/Create', [
+            'languages' => config('laravellocalization.supportedLocales'),
         ]);
     }
 

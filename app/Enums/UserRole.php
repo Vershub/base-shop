@@ -24,10 +24,6 @@ enum UserRole: string
         return array_column(self::cases(), 'name');
     }
 
-    /**
-     * @param string $roleName
-     * @return UserRole|null
-     */
     public static function getByName(string $roleName): ?self
     {
         foreach (self::cases() as $case) {

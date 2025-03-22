@@ -22,20 +22,20 @@ class UserSeeder extends Seeder
                 'name' => 'Admin',
                 'email' => 'admin@admin.com',
                 'password' => 'adminpassword',
-                'role' => UserRole::ADMIN
+                'role' => UserRole::ADMIN,
             ],
             [
                 'name' => 'Manager',
                 'email' => 'manager@manager.com',
                 'password' => 'managerpassword',
-                'role' => UserRole::MANAGER
+                'role' => UserRole::MANAGER,
             ],
             [
                 'name' => 'Test Client',
                 'email' => 'client@example.com',
                 'password' => 'password',
-                'role' => UserRole::CLIENT
-            ]
+                'role' => UserRole::CLIENT,
+            ],
         ];
 
         foreach ($initialUsers as $userData) {
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
                 [
                     'name' => $userData['name'],
                     'email' => $userData['email'],
-                    'password' => bcrypt($userData['password'])
+                    'password' => bcrypt($userData['password']),
                 ]
             ), $userData['role']);
         }

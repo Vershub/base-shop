@@ -22,7 +22,7 @@ class BundleController extends Controller
     public function create(): \Inertia\Response
     {
         return Inertia::render('Admin/Product/Bundle/Create', [
-            'languages' => config('laravellocalization.supportedLocales')
+            'languages' => config('laravellocalization.supportedLocales'),
         ]);
     }
 

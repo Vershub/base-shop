@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use Illuminate\Foundation\Inspiring;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,13 +35,12 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
-        [$message, $author] = str(Inspiring::quotes()->random())->explode('-');
         $user = $request->user();
 
-        return [
+        /** @var array<string, mixed> $data */
+        $data = [
             ...parent::share($request),
             'name' => config('app.name'),
-            'quote' => ['message' => trim($message), 'author' => trim($author)],
             'auth' => [
                 'user' => $user ? [
                     'id' => $user->id,
@@ -52,5 +50,7 @@ class HandleInertiaRequests extends Middleware
                 ] : null,
             ],
         ];
+
+        return $data;
     }
 }

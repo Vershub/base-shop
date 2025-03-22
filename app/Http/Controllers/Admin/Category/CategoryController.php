@@ -15,8 +15,7 @@ use Throwable;
 
 class CategoryController extends Controller
 {
-    public function __construct(readonly public CategoryService $categoryService)
-    {}
+    public function __construct(readonly public CategoryService $categoryService) {}
 
     /**
      * Display a listing of the resource.
@@ -27,7 +26,7 @@ class CategoryController extends Controller
             'categories' => Category::query()
                 ->select(['id', 'slug', 'sort_order', 'active', 'created_at'])
                 ->withTranslation(':id,category_id,name,locale_code')
-                ->get()
+                ->get(),
         ]);
     }
 
@@ -37,19 +36,26 @@ class CategoryController extends Controller
     public function create(): \Inertia\Response
     {
         return Inertia::render('Admin/Category/Create', [
-            'languages' => config('laravellocalization.supportedLocales')
+            'languages' => config('laravellocalization.supportedLocales'),
         ]);
     }
 
     /**
      * Store a newly created resource in storage.
+     *
      * @throws Throwable
      */
     public function store(StoreCategoryRequest $request): RedirectResponse
     {
+        /** @var array<string, int|string> $categoryData */
+        $categoryData = $request->array('static');
+
+        /** @var array<string, array<string, string|null>> $translations */
+        $translations = $request->array('locales');
+
         $this->categoryService->createCategory(
-            categoryData: $request->array('static'),
-            translations: $request->array('locales'),
+            categoryData: $categoryData,
+            translations: $translations,
             image: $this->extractImageFromRequest($request)
         );
 
@@ -66,22 +72,27 @@ class CategoryController extends Controller
 
         return Inertia::render('Admin/Category/Edit', [
             'category' => $category,
-            'languages' => config('laravellocalization.supportedLocales')
+            'languages' => config('laravellocalization.supportedLocales'),
         ]);
     }
 
     /**
      * Update the specified resource in storage.
+     *
      * @throws Throwable
      */
     public function update(UpdateCategoryRequest $request, int $id): RedirectResponse
     {
+        /** @var array<string, int|string> $categoryData */
         $categoryData = $request->array('static');
+
+        /** @var array<string, array<string, string|null>> $translations */
+        $translations = $request->array('locales');
 
         $this->categoryService->updateCategory(
             id: $id,
             categoryData: $categoryData,
-            translations: $request->array('locales'),
+            translations: $translations,
             image: $this->extractImageFromRequest($request)
 
         );
@@ -101,7 +112,7 @@ class CategoryController extends Controller
 
     private function extractImageFromRequest(Request $request): ?UploadedFile
     {
-        if (!$request->hasFile('static.image')) {
+        if (! $request->hasFile('static.image')) {
             return null;
         }
         /** @var UploadedFile $image */
@@ -109,6 +120,4 @@ class CategoryController extends Controller
 
         return $image;
     }
-
-
 }

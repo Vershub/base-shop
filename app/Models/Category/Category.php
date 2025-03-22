@@ -11,6 +11,7 @@ use Vershub\LaravelTranslations\Model\TranslatableModel;
 
 /**
  * @method static Builder<static> withTranslation()
+ *
  * @property string|null $image
  */
 class Category extends TranslatableModel implements HasMedia
@@ -22,7 +23,7 @@ class Category extends TranslatableModel implements HasMedia
     protected $fillable = [
         'slug',
         'active',
-        'sort_order'
+        'sort_order',
     ];
 
     public function registerMediaCollections(): void

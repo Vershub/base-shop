@@ -8,6 +8,6 @@ class ProductTranslation extends Model
 {
     protected $fillable = [
         'name',
-        'description'
+        'description',
     ];
 }

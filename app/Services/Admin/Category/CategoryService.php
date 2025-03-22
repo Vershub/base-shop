@@ -12,13 +12,12 @@ use Throwable;
 final class CategoryService
 {
     /**
-     * @param array<string, string|int> $categoryData
-     * @param array<string, array<string, string|null>> $translations
-     * @param UploadedFile|null $image
-     * @return Category
+     * @param  array<string, string|int>  $categoryData
+     * @param  array<string, array<string, string|null>>  $translations
+     *
      * @throws Throwable
      */
-    public function createCategory(array $categoryData, array $translations, null|UploadedFile $image): Category
+    public function createCategory(array $categoryData, array $translations, ?UploadedFile $image): Category
     {
         return DB::transaction(function () use ($categoryData, $translations, $image) {
             $category = Category::create([
@@ -38,8 +37,9 @@ final class CategoryService
     }
 
     /**
-     * @param array<string, string|int> $categoryData
-     * @param array<string, array<string, string|null>> $translations
+     * @param  array<string, string|int>  $categoryData
+     * @param  array<string, array<string, string|null>>  $translations
+     *
      * @throws Throwable
      */
     public function updateCategory(int $id, array $categoryData, array $translations, ?UploadedFile $image): Category
@@ -63,8 +63,6 @@ final class CategoryService
     }
 
     /**
-     * @param Category $category
-     * @param UploadedFile $image
      * @throws FileDoesNotExist
      * @throws FileIsTooBig
      */
@@ -75,7 +73,7 @@ final class CategoryService
     }
 
     /**
-     * @param array<string, array<string, string|null>> $translations
+     * @param  array<string, array<string, string|null>>  $translations
      */
     private function syncTranslations(Category $category, array $translations): void
     {

@@ -9,7 +9,6 @@ enum RolePermission: string
     case EDIT_CATEGORIES = 'edit_categories';
     case DELETE_CATEGORIES = 'delete_categories';
 
-
     /**
      * @return array<string>
      */
@@ -31,7 +30,7 @@ enum RolePermission: string
      */
     public static function forRole(UserRole $role): array
     {
-        return match($role) {
+        return match ($role) {
             UserRole::ADMIN => self::values(),
             UserRole::MANAGER => [
                 self::VIEW_CATEGORIES->value,

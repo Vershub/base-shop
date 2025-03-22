@@ -9,6 +9,7 @@ use Illuminate\Validation\Rule;
 class StoreCategoryRequest extends FormRequest
 {
     use AppLocale;
+
     /*
      * Determine if the user is authorized to make this request.
      */
@@ -37,9 +38,9 @@ class StoreCategoryRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                Rule::unique('categories', 'slug')->ignore($this->route('category'))
+                Rule::unique('categories', 'slug')->ignore($this->route('category')),
             ],
-            'static.image' => ['image']
+            'static.image' => ['image'],
         ];
     }
 }

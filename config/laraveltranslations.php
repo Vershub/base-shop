@@ -1,5 +1,5 @@
 <?php
 
 return [
-    'locale_code_column' => 'locale_code'
+    'locale_code_column' => 'locale_code',
 ];
