@@ -23,7 +23,7 @@
             <td class="px-6 py-4 whitespace-nowrap">{{ category?.translation.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap">#{{ category.sort_order }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
-              <ActiveBadge :status="!!category.active" />
+              <ActiveBadge :status="category.active" />
             </td>
             <td class="px-6 py-4 whitespace-nowrap">{{ category.created_at }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
@@ -41,14 +41,31 @@
 </template>
 
 <script setup lang="ts">
-import AdminLayout from "@/Layouts/AdminLayout.vue";
-import ActiveBadge from "@/Components/Admin/ActiveBadge.vue";
-import DeleteLink from "@/Components/Admin/DeleteLink.vue";
-import EditLink from "@/Components/Admin/EditLink.vue";
-import ButtonPrimaryLink from "@/Components/Admin/ButtonPrimaryLink.vue";
+import { PropType } from "vue";
+import AdminLayout from "@/layouts/AdminLayout.vue";
+import ActiveBadge from "@/components/Admin/ActiveBadge.vue";
+import DeleteLink from "@/components/Admin/DeleteLink.vue";
+import EditLink from "@/components/Admin/EditLink.vue";
+import ButtonPrimaryLink from "@/components/Admin/ButtonPrimaryLink.vue";
+
+interface CategoryTranslation {
+    name: string;
+    locale_code: string;
+    category_id: number;
+    id: number;
+}
+
+interface Category {
+    id: number;
+    slug: string;
+    sort_order: number;
+    active: boolean;
+    created_at: string;
+    translation: CategoryTranslation;
+}
 
 defineProps({
-  categories: Array,
+    categories: Array as PropType<Category[]>,
 });
 
 </script>
