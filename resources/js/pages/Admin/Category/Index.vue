@@ -6,7 +6,7 @@
         <ButtonPrimaryLink v-if="$can('create_categories')" title="Create" :link-route="route('admin.categories.create')" link-text="Create"/>
       </div>
       <div class="bg-white shadow-md rounded-lg overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200">
+        <table v-if="$can('view_categories')" class="min-w-full divide-y divide-gray-200">
           <thead class="bg-gray-50">
           <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
@@ -28,8 +28,8 @@
             <td class="px-6 py-4 whitespace-nowrap">{{ category.created_at }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="flex gap-2">
-                <EditLink :edit-route="route('admin.categories.edit', category.id)" />
-                <DeleteLink :delete-route="route('admin.categories.destroy', category.id)"/>
+                <EditLink v-if="$can('edit_categories')" :edit-route="route('admin.categories.edit', category.id)" />
+                <DeleteLink v-if="$can('delete_categories')" :delete-route="route('admin.categories.destroy', category.id)"/>
               </div>
             </td>
           </tr>
