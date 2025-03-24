@@ -18,7 +18,7 @@
         "spatie/laravel-medialibrary": "^11.12",
         "spatie/laravel-permission": "^6.13",
         "spatie/simple-excel": "^3.7",
-        "vershub/laraveltranslations": "dev-master"
+        "vershub/laraveltranslations": "v1.0.1"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.14",
