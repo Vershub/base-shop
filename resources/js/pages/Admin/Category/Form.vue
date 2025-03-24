@@ -98,15 +98,15 @@
 <script lang="ts" setup>
 import { watch } from "vue";
 import { ref } from "vue";
-import { useLocaleStore } from "@/stores/localeStore.ts";
-import { useEntityForm } from "@/Composables/forms/useEntityForm.ts";
-import { useChangeLocaleTab } from "@/Composables/forms/useChangeLocaleTab.ts";
-import InputText from "@/Components/Admin/InputText.vue";
-import InputTextArea from "@/Components/Admin/InputTextArea.vue";
-import InputNumber from "@/Components/Admin/InputNumber.vue";
-import InputCheckbox from "@/Components/Admin/InputCheckbox.vue";
-import ButtonPrimary from "@/Components/Admin/ButtonPrimary.vue";
-import InputFile from "@/Components/Admin/InputFile.vue";
+import { useLocaleStore } from '@/stores/localeStore';
+import { useEntityForm } from "@/composables/forms/useEntityForm";
+import { useChangeLocaleTab } from "@/composables/forms/useChangeLocaleTab";
+import InputText from "@/components/Admin/InputText.vue";
+import InputTextArea from "@/components/Admin/InputTextArea.vue";
+import InputNumber from "@/components/Admin/InputNumber.vue";
+import InputCheckbox from "@/components/Admin/InputCheckbox.vue";
+import ButtonPrimary from "@/components/Admin/ButtonPrimary.vue";
+import InputFile from "@/components/Admin/InputFile.vue";
 
 const props = defineProps({
   category: {
@@ -129,10 +129,9 @@ watch(() => form.errors, (newErrors) => {
   }
 }, { deep: true });
 
-const handleFile = (file) => {
+const handleFile = (file: File) => {
   form.static.image = file;
 };
-
 
 const submit = () => {
   if (props.category) {
