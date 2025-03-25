@@ -96,17 +96,18 @@
 </template>
 
 <script lang="ts" setup>
+import { route } from "ziggy-js";
 import { watch } from "vue";
 import { ref } from "vue";
-import { useLocaleStore } from '@/stores/localeStore';
-import { useEntityForm } from "@/composables/forms/useEntityForm";
-import { useChangeLocaleTab } from "@/composables/forms/useChangeLocaleTab";
-import InputText from "@/components/Admin/InputText.vue";
-import InputTextArea from "@/components/Admin/InputTextArea.vue";
-import InputNumber from "@/components/Admin/InputNumber.vue";
-import InputCheckbox from "@/components/Admin/InputCheckbox.vue";
-import ButtonPrimary from "@/components/Admin/ButtonPrimary.vue";
-import InputFile from "@/components/Admin/InputFile.vue";
+import { useLocaleStore } from "../../../stores/localeStore";
+import { useEntityForm } from '../../../composables/forms/useEntityForm';
+import { useChangeLocaleTab } from "../../../composables/forms/useChangeLocaleTab";
+import InputText from "../../../components/Admin/InputText.vue";
+import InputTextArea from "../../../components/Admin/InputTextArea.vue";
+import InputNumber from "../../../components/Admin/InputNumber.vue";
+import InputCheckbox from "../../../components/Admin/InputCheckbox.vue";
+import ButtonPrimary from "../../../components/Admin/ButtonPrimary.vue";
+import InputFile from "../../../components/Admin/InputFile.vue";
 
 const props = defineProps({
   category: {
