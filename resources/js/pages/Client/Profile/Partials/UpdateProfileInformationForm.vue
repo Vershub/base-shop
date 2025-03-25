@@ -1,9 +1,20 @@
-<script setup>
-import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
+<script setup lang="ts">
+import InputError from '@/components/InputError.vue';
+import InputLabel from '@/components/InputLabel.vue';
+import PrimaryButton from '@/components/PrimaryButton.vue';
+import TextInput from '@/components/TextInput.vue';
 import { Link, useForm, usePage } from '@inertiajs/vue3';
+
+interface AuthUserProps {
+    auth: {
+        user: {
+            name: string;
+            email: string;
+            email_verified_at: string | null;
+        }
+    };
+    [key: string]: any;
+}
 
 defineProps({
     mustVerifyEmail: {
@@ -14,12 +25,14 @@ defineProps({
     },
 });
 
-const user = usePage().props.auth.user;
+const page = usePage<AuthUserProps>();
+const user = page.props.auth.user;
 
 const form = useForm({
     name: user.name,
     email: user.email,
 });
+
 </script>
 
 <template>
