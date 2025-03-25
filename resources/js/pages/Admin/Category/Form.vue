@@ -99,7 +99,7 @@
 import { route } from "ziggy-js";
 import { watch } from "vue";
 import { ref } from "vue";
-import { useLocaleStore } from "../../../stores/localeStore";
+import { useLocaleStore } from "@/stores/localeStore";
 import { useEntityForm } from '../../../composables/forms/useEntityForm';
 import { useChangeLocaleTab } from "../../../composables/forms/useChangeLocaleTab";
 import InputText from "../../../components/Admin/InputText.vue";
