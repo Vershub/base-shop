@@ -5,9 +5,9 @@
   </AdminLayout>
 </template>
 
-<script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
-import Form from "@/Pages/Admin/Product/Form.vue";
+<script setup lang="ts">
+import AdminLayout from "@/layouts/AdminLayout.vue";
+import Form from "@/pages/Admin/Product/Form.vue";
 
 defineProps({
   languages: {

@@ -31,12 +31,9 @@
   </AdminLayout>
 </template>
 
-<script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
-import ActiveBadge from "@/Components/Admin/ActiveBadge.vue";
-import DeleteLink from "@/Components/Admin/DeleteLink.vue";
-import EditLink from "@/Components/Admin/EditLink.vue";
-import ButtonPrimaryLink from "@/Components/Admin/ButtonPrimaryLink.vue";
+<script setup lang="ts">
+import AdminLayout from "@/layouts/AdminLayout.vue";
+import ButtonPrimaryLink from "@/components/Admin/ButtonPrimaryLink.vue";
 
 defineProps({
   bundles: Array,

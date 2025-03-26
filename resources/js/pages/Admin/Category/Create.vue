@@ -5,12 +5,15 @@
   </AdminLayout>
 </template>
 
-<script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
+<script setup lang="ts">
+import AdminLayout from "@/layouts/AdminLayout.vue";
 import Form from "./Form.vue";
 
 defineProps({
-  languages: Object,
+  languages: {
+      type: Object,
+      required: true,
+  },
   errors: Object
 });
 </script>

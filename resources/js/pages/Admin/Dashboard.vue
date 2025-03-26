@@ -57,6 +57,6 @@
   </AdminLayout>
 </template>
 
-<script setup>
-import AdminLayout from "@/Layouts/AdminLayout.vue";
+<script setup lang="ts">
+import AdminLayout from "@/layouts/AdminLayout.vue";
 </script>
