@@ -21,7 +21,8 @@ export interface Form {
 
 
 export function useEntityForm(activeLocale: string, entity: Entity) {
-    const formData = {
+    console.log(entity)
+    const form: InertiaForm<Form> = useForm({
         locales: entity.translates
             ? entity.translates.reduce<Record<string, typeof entity.translates[number]>>
             ((acc, translate) => {
@@ -34,9 +35,8 @@ export function useEntityForm(activeLocale: string, entity: Entity) {
         static: entity ? Object.fromEntries(
             Object.entries(entity).filter(([key]) => !['id', 'translates', 'created_at', 'updated_at', 'media'].includes(key))
         ) : {}
-    };
-
-    const form: InertiaForm<Form> = useForm(formData);
+    });
+    console.log(form)
 
     return {
         form

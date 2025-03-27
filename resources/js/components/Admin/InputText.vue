@@ -4,7 +4,7 @@
     v-model="model"
     @focus="clearError()"
     type="text"
-    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+    class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-black"
   />
   <div v-if="errorMessage" class="text-sm text-red-500 mt-1 mb-3">
     {{ errorMessage }}

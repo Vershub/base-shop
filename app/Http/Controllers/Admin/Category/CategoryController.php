@@ -68,7 +68,6 @@ class CategoryController extends Controller
     public function edit(int $id): \Inertia\Response
     {
         $category = Category::with('translates')->findOrFail($id);
-        $category->image = $category->getFirstMediaUrl(Category::CATEGORY_IMAGE_COLLECTION);
 
         return Inertia::render('Admin/Category/Edit', [
             'category' => $category,

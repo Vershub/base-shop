@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product\Product;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -37,9 +38,14 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id): void
+    public function edit(string $id): \Inertia\Response
     {
-        //
+        $product = Product::with('translates')->findOrFail($id);
+
+        return Inertia::render('Admin/Product/Edit', [
+            'product' => $product,
+            'languages' => config('laravellocalization.supportedLocales'),
+        ]);
     }
 
     /**

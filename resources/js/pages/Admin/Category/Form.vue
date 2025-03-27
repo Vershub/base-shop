@@ -63,7 +63,7 @@
           <InputText
             label="Slug(*)"
             v-model="form.static.slug"
-            :error-message="form.errors[`static.slug`]"
+            :error-message="form.errors['static.slug']"
             @clearError="form.clearErrors('static.slug')"
           />
         </div>
@@ -97,7 +97,7 @@
 
 <script lang="ts" setup>
 import { route } from "ziggy-js";
-import { watch } from "vue";
+import { reactive, watch } from "vue";
 import { ref } from "vue";
 import { useLocaleStore } from "@/stores/localeStore";
 import { useEntityForm } from "@/composables/forms/useEntityForm";
@@ -121,7 +121,7 @@ const props = defineProps({
 });
 
 const activeLocale = ref(useLocaleStore().defaultLocale);
-const { form } = useEntityForm(activeLocale.value, props.category ?? {active: true, sort_order: 1})
+const { form } = useEntityForm(activeLocale.value, props.category ?? {active: true, sort_order: 1});
 useChangeLocaleTab(form, activeLocale);
 
 watch(() => form.errors, (newErrors) => {

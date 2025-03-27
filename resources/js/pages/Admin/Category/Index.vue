@@ -19,13 +19,13 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
           <tr v-for="category in categories" :key="category.id">
-            <td class="px-6 py-4 whitespace-nowrap">{{ category.id }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ category?.translation.name }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">#{{ category.sort_order }}</td>
-            <td class="px-6 py-4 whitespace-nowrap">
+            <td class="px-6 py-4 whitespace-nowrap text-black">{{ category.id }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">{{ category?.translation.name }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">#{{ category.sort_order }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">
               <ActiveBadge :status="category.active" />
             </td>
-            <td class="px-6 py-4 whitespace-nowrap">{{ category.created_at }}</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">{{ category.created_at }}</td>
             <td class="px-6 py-4 whitespace-nowrap">
               <div class="flex gap-2">
                 <EditLink v-if="$can('edit_categories')" :edit-route="route('admin.categories.edit', category.id)" />

@@ -18,11 +18,11 @@
           </thead>
           <tbody class="bg-white divide-y divide-gray-200">
           <tr>
-            <td class="px-6 py-4 whitespace-nowrap">#12345</td>
-            <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-            <td class="px-6 py-4 whitespace-nowrap">2023-05-01</td>
-            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span></td>
-            <td class="px-6 py-4 whitespace-nowrap">$123.45</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">#12345</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">John Doe</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">2023-05-01</td>
+            <td class="px-6 py-4 whitespace-nowrap text-black"><span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Completed</span></td>
+            <td class="px-6 py-4 whitespace-nowrap text-black">$123.45</td>
           </tr>
           </tbody>
         </table>

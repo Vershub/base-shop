@@ -26,6 +26,8 @@ class Category extends TranslatableModel implements HasMedia
         'sort_order',
     ];
 
+    protected $appends = ['image'];
+
     public function registerMediaCollections(): void
     {
         $this->addMediaCollection(self::CATEGORY_IMAGE_COLLECTION)
@@ -49,6 +51,16 @@ class Category extends TranslatableModel implements HasMedia
     {
         return new Attribute(
             get: fn (int $value) => (bool) $value
+        );
+    }
+
+    /**
+     * @return Attribute<string|null, mixed>
+     */
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->getFirstMediaUrl(self::CATEGORY_IMAGE_COLLECTION)
         );
     }
 
